@@ -2,6 +2,14 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
+const ratingSchema = new Schema({
+  author:{ 
+    type: Schema.Types.ObjectId, 
+    ref: 'Profile' },
+  comment: String,
+  rating: Number
+})
+
 const restaurantSchema = new Schema({
   name: String,
   location: String,
@@ -11,17 +19,12 @@ const restaurantSchema = new Schema({
   ttreviews: { 
     type: Schema.Types.ObjectId, 
     ref: 'TTReview' },
-  sharer: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'Profile' },
-  likes: [{ 
-    type: Schema.Types.ObjectId, 
-    ref: 'Profile' }],
-  tiktoker: String
+  ratings: { 
+      type: ratingSchema }
 },{
   timestamps: true,
 })
 
-const TTReview = mongoose.model('TTReview', ttReviewSchema)
+const Restaurant = mongoose.model('Restaurant', restaurantSchema)
 
-export { TTReview }
+export { Restaurant }
