@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as profilesCtrl from '../controllers/profiles.js'
+import * as restaurantCtrl from '../controllers/restaurants.js'
 import { decodeUserFromToken, checkAuth } from '../middleware/auth.js'
 
 const router = Router()
@@ -8,8 +8,5 @@ const router = Router()
 
 
 /*---------- Protected Routes ----------*/
-router.use(decodeUserFromToken)
-router.get('/', checkAuth, profilesCtrl.index)
-
 
 export { router }
