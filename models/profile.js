@@ -3,7 +3,12 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const profileSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    require: true},
+  photo: {
+    type: String,
+    require: true},
   shared: [{ 
     type: Schema.Types.ObjectId, 
     ref: 'TTReview' }],
