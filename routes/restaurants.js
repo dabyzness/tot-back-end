@@ -1,12 +1,19 @@
-import { Router } from 'express'
-import * as restaurantCtrl from '../controllers/restaurants.js'
-import { decodeUserFromToken, checkAuth } from '../middleware/auth.js'
+import { Router } from 'express';
+import * as restaurantCtrl from '../controllers/restaurants.js';
+import { decodeUserFromToken, checkAuth } from '../middleware/auth.js';
 
-const router = Router()
+const router = Router();
 
 /*---------- Public Routes ----------*/
-
+router.get('/', restaurantCtrl.index);
+router.get('/:id', restaurantCtrl.show);
 
 /*---------- Protected Routes ----------*/
+router.use(decodeUserFromToken);
+router.get('/:id/edit', checkAuth, restaurantCtrl.edit);
 
-export { router }
+router.post('/', checkAuth, restaurantCtrl.create);
+router.patch('/:id', checkAuth, restaurantCtrl.update);
+router.delete('/:id', checkAuth, restaurantCtrl.delete);
+
+export { router };
