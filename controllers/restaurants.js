@@ -1,0 +1,1 @@
+import { Restaurant } from '../models/restaurant.js'
