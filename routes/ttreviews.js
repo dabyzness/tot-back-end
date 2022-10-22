@@ -10,7 +10,6 @@ router.get('/:id', ttreviewCtrl.show);
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken);
-router.get('/:id/edit', checkAuth, ttreviewCtrl.edit);
 
 router.post('/', checkAuth, ttreviewCtrl.create);
 router.patch('/:id', checkAuth, ttreviewCtrl.update);
