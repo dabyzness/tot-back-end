@@ -12,7 +12,10 @@ const ratingSchema = new Schema({
 
 const restaurantSchema = new Schema({
   name: String,
-  location: String,
+  location: {
+    latitude: String,
+    longitude:String
+  },
   website: String,
   cuisineType: [String],
   tags: [String],

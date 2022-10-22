@@ -10,7 +10,7 @@ router.get('/:id', restaurantCtrl.show);
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken);
-router.get('/:id/edit', checkAuth, restaurantCtrl.edit);
+
 
 router.post('/', checkAuth, restaurantCtrl.create);
 router.patch('/:id', checkAuth, restaurantCtrl.update);

@@ -67,7 +67,7 @@ export {
   create,
   index,
   show,
-  edit,
+
   update,
   deleteTTReview as delete
 }
