@@ -4,6 +4,8 @@ import { Profile } from '../models/profile.js'
 const create = async (req, res) => {
   try {
     req.body.sharer = req.user.profile
+    req.body.tiktoker = req.body.url.split('/')[3]
+    req.body.vidID = req.body.url.split('/')[5].split('?')[0]
     const ttreview = await TTReview.create(req.body)
     const profile = await Profile.findByIdAndUpdate(
       req.user.profile,
@@ -67,7 +69,6 @@ export {
   create,
   index,
   show,
-
   update,
   deleteTTReview as delete
 }
