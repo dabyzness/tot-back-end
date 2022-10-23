@@ -13,7 +13,8 @@ const ttReviewSchema = new Schema({
   likes: [{ 
     type: Schema.Types.ObjectId, 
     ref: 'Profile' }],
-  tiktoker: String
+  tiktoker: String,
+  vidID: String
 },{
   timestamps: true,
 })
