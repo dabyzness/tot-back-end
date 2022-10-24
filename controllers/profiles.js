@@ -11,6 +11,7 @@ function index(req, res) {
 
 function show(req, res) {
   Profile.findById(req.params.id)
+  .populate('shared')
   .then(profile => res.json(profile))
   .catch(err => {
     console.log(err)
