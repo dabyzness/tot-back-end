@@ -15,6 +15,7 @@ function show(req, res) {
   .populate('visited')
   .populate('followers')
   .populate('following')
+  .populate('wishlist')
   .then(profile => res.json(profile))
   .catch(err => {
     console.log(err)
