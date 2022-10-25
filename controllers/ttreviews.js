@@ -6,6 +6,9 @@ const create = async (req, res) => {
   try {
     if (req.body.url.length < 40) {
       const data = await getDataFromURL(req.body.url);
+      req.body.ttNumLikes = data.numLikes;
+      req.body.ttNumComments = data.numComments;
+      req.body.staticImg = data.staticImg;
       req.body.tiktoker = data.url.split("/")[3];
       req.body.vidID = data.url.split("/")[5].split("?")[0];
     } else {
