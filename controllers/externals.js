@@ -29,6 +29,7 @@ async function unshorten(req, res) {
 
     res.status(200).json(data);
   } catch (error) {
+    unshorten(req, res);
     console.log(error);
     res.status(500).json(error);
   }
