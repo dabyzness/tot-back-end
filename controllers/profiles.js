@@ -13,6 +13,8 @@ function show(req, res) {
   Profile.findById(req.params.id)
   .populate('shared')
   .populate('visited')
+  .populate('followers')
+  .populate('following')
   .then(profile => res.json(profile))
   .catch(err => {
     console.log(err)
