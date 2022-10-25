@@ -1,24 +1,32 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const ttReviewSchema = new Schema({
-  url: String,
-  restaurant: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'Restaurant' },
-  sharer: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'Profile' },
-  likes: [{ 
-    type: Schema.Types.ObjectId, 
-    ref: 'Profile' }],
-  tiktoker: String,
-  vidID: String
-},{
-  timestamps: true,
-})
+const ttReviewSchema = new Schema(
+  {
+    url: String,
+    restaurant: {
+      type: Schema.Types.ObjectId,
+      ref: "Restaurant",
+    },
+    sharer: {
+      type: Schema.Types.ObjectId,
+      ref: "Profile",
+    },
+    likes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Profile",
+      },
+    ],
+    tiktoker: String,
+    vidID: { type: String, unique: true },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const TTReview = mongoose.model('TTReview', ttReviewSchema)
+const TTReview = mongoose.model("TTReview", ttReviewSchema);
 
-export { TTReview }
+export { TTReview };
