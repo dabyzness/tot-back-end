@@ -93,6 +93,7 @@ const updateRating = async (req,res) => {
     rating.comment = req.body.comment
     rating.rating = req.body.rating
     await restaurant.save()
+
     res.status(200).json(restaurant)
   } catch (error) {
     res.status(500).json(error)
