@@ -5,4 +5,6 @@ const router = Router();
 
 router.get("/unshorten", externalsCtrl.unshorten);
 
+router.get("/test", externalsCtrl.google);
+
 export { router };
