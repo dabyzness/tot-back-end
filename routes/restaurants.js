@@ -12,6 +12,7 @@ router.get("/:id", restaurantCtrl.show);
 router.use(decodeUserFromToken);
 
 router.post("/", checkAuth, restaurantCtrl.create);
+router.post("/:id", checkAuth, restaurantCtrl.createRating);
 router.patch("/:id", checkAuth, restaurantCtrl.update);
 router.delete("/:id", checkAuth, restaurantCtrl.delete);
 

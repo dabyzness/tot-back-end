@@ -50,10 +50,25 @@ const deleteRestaurant = async (req, res) => {
   }
 }
 
+const createRating = async (req,res) => {
+  try {
+    req.body.author = req.user.profile
+    const restaurant = await Restaurant.findById(req.params.id)
+    restaurant.ratings.push(req.body)
+    await restaurant.save()
+    console.log(restaurant)
+    res.status(200).json(restaurant)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+
 export {
   create,
   index,
   show,
   update,
-  deleteRestaurant as delete
+  deleteRestaurant as delete,
+  createRating
 }

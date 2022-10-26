@@ -19,12 +19,12 @@ const restaurantSchema = new Schema({
   website: String,
   cuisineType: [String],
   tags: [String],
-  ttreviews: { 
+  ttreviews: [{ 
     type: Schema.Types.ObjectId, 
-    ref: 'TTReview' },
-  ratings: { 
-      type: ratingSchema }
-},{
+    ref: 'TTReview' }],
+  ratings: [ratingSchema],
+},
+  {
   timestamps: true,
 })
 
