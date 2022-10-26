@@ -37,7 +37,32 @@ function follow(req,res){
           res.json(savedProfile)
         })
       })
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
 
+function unfollow(req,res){
+  Profile.findById(req.params.id)
+  .then(profile => {
+    const index = profile.followers.indexOf(req.user.profile)
+    console.log(index)
+    profile.followers.splice(index,1)
+    profile.save()
+    .then(savedProfile=>{
+      Profile.findById(req.user.profile)
+      .then(currentProfile => {
+        const idx = currentProfile.following.indexOf(savedProfile._id)
+        console.log(idx)
+        currentProfile.following.splice(idx,1)
+        currentProfile.save()
+        .then(()=>{
+          res.json(savedProfile)
+        })
+      })
     })
   })
   .catch(err => {
@@ -50,4 +75,5 @@ export {
   index,
   show,
   follow,
+  unfollow,
 }

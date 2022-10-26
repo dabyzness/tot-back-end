@@ -14,6 +14,7 @@ router.get('/', checkAuth, profilesCtrl.index)
 router.get('/:id', checkAuth, profilesCtrl.show)
 
 router.patch('/:id', checkAuth, profilesCtrl.follow)
+router.put('/:id', checkAuth, profilesCtrl.unfollow)
 
 
 export { router }
