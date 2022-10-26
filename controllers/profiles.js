@@ -23,7 +23,31 @@ function show(req, res) {
   })
 }
 
+function follow(req,res){
+  Profile.findById(req.params.id)
+  .then(profile => {
+    profile.followers.push(req.user.profile)
+    profile.save()
+    .then(savedProfile=>{
+      Profile.findById(req.user.profile)
+      .then(currentProfile => {
+        currentProfile.following.push(savedProfile._id)
+        currentProfile.save()
+        .then(()=>{
+          res.json(savedProfile)
+        })
+      })
+
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export { 
   index,
-  show 
+  show,
+  follow,
 }
