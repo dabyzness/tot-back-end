@@ -1,3 +1,4 @@
+import { Profile } from '../models/profile.js'
 import { Restaurant } from "../models/restaurant.js";
 import { scrapeGoogle } from "./externals.js";
 
@@ -24,8 +25,16 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const restaurant = await Restaurant.findById(req.params.id);
-    res.status(200).json(restaurant);
+    const restaurant = await Restaurant.findById(req.params.id)
+    .populate({
+      path:'ratings',
+      model:"Ratings",
+      populate: {
+        path:"author",
+        model:"Profile"
+      }
+    })
+    res.status(200).json(restaurant)
   } catch (error) {
     res.status(500).json(error);
   }
@@ -53,4 +62,54 @@ const deleteRestaurant = async (req, res) => {
   }
 };
 
-export { create, index, show, update, deleteRestaurant as delete };
+const createRating = async (req,res) => {
+  try {
+    req.body.author = req.user.profile
+    const restaurant = await Restaurant.findById(req.params.id)
+    restaurant.ratings.push(req.body)
+    await restaurant.save()
+    const author = await Profile.findById(req.user.profile)
+    author.visited.push(restaurant)
+    await author.save()
+    res.status(200).json(restaurant)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+const showRating = async (req,res) => {
+  try {
+    const restaurant = await Restaurant.findById(req.params.id)
+    const ratingdata = restaurant.ratings.id(req.params.ratingid)
+    res.status(200).json(ratingdata)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+
+const updateRating = async (req,res) => {
+  try {
+    const restaurant = await Restaurant.findById(req.params.id)
+    const rating = restaurant.ratings.id(req.params.ratingid)
+    rating.comment = req.body.comment
+    rating.rating = req.body.rating
+    await restaurant.save()
+
+    res.status(200).json(restaurant)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+
+export {
+  create,
+  index,
+  show,
+  update,
+  deleteRestaurant as delete,
+  createRating,
+  showRating,
+  updateRating
+}
