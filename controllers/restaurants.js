@@ -56,7 +56,6 @@ const createRating = async (req,res) => {
     const restaurant = await Restaurant.findById(req.params.id)
     restaurant.ratings.push(req.body)
     await restaurant.save()
-    console.log(restaurant)
     res.status(200).json(restaurant)
   } catch (error) {
     res.status(500).json(error)
