@@ -102,6 +102,19 @@ const updateRating = async (req,res) => {
   }
 }
 
+const deleteRating = async (req,res) => {
+  try{
+    const restaurant = await Restaurant.findByIdAndUpdate(req.params.id,{
+      $pull: {
+        ratings: {_id : req.params.ratingid}
+      }
+    })
+    res.status(200).json(restaurant)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 
 export {
   create,
@@ -111,5 +124,6 @@ export {
   deleteRestaurant as delete,
   createRating,
   showRating,
-  updateRating
+  updateRating,
+  deleteRating
 }

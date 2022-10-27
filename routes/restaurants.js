@@ -18,5 +18,6 @@ router.patch("/:id", checkAuth, restaurantCtrl.update);
 router.patch("/:id/rating/:ratingid", checkAuth, restaurantCtrl.updateRating);
 
 router.delete("/:id", checkAuth, restaurantCtrl.delete);
+router.delete("/:id/rating/:ratingid", checkAuth, restaurantCtrl.deleteRating);
 
 export { router };
