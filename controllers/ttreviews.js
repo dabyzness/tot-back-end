@@ -1,6 +1,7 @@
 import { TTReview } from "../models/ttreview.js";
 import { Profile } from "../models/profile.js";
 import { getDataFromURL } from "./externals.js";
+import { Restaurant } from "../models/restaurant.js";
 
 const create = async (req, res) => {
   try {
@@ -13,7 +14,7 @@ const create = async (req, res) => {
     req.body.expiresAt = data.expiresAt;
 
     req.body.sharer = req.user.profile;
-
+    console.log(req.body)
     const ttreview = await TTReview.create(req.body);
     const profile = await Profile.findByIdAndUpdate(
       req.user.profile,
@@ -21,6 +22,11 @@ const create = async (req, res) => {
       { new: true }
     );
     ttreview.sharer = profile;
+    const restaurant = await Restaurant.findByIdAndUpdate(
+      ttreview.restaurant,
+      { $push: { ttreviews: ttreview } },
+      { new: true }
+    );
     res.status(201).json(ttreview);
   } catch (error) {
     console.log(error);
