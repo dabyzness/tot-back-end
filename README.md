@@ -1,73 +1,37 @@
-# Decoupled MERN Stack with JWT Auth Template - Back End
+# Taste of TikTok (aka ToT)
+## <a href="https://tots-hot-tots.netlify.app/">Link to App!</a>
+<a href="https://github.com/dabyzness/tot-front-end">Link to Frontend</a>
 
-This is the back end of a decoupled MERN Stack app that includes JWT Authentication.
+INSERT APP SCREENSHOT
+INSERT APP SCREENSHOT
 
-When combined with the front end found [here](https://github.com/SEI-Remote/decoupled-mern-jwt-auth-template-front-end), you'll have all you need to build a full stack MERN app!
+## About this project
+Have you ever been scrolling on TikTok and found a review of a restaurant you'd love to visit?  That where Taste of TikTok comes in handy!  Save TikTok restaurant reviews and their corresponding restaurants in the app, then when you're hungry return to the app and find added restaurants!
 
-Use this to go build things! 🚀
+## Planning Materials
+<a href="https://trello.com/b/Zlz6fYZh/tot">Link to Trello Board</a>
 
-## To Use This Template
 
-**Replace `<name-of-your-app-here>` in the commands below with the name of your app!**
+## Technologies Used
+[![Generic badge](https://img.shields.io/badge/Made%20with-React-blue.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Made%20with-MongoDB-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Made%20with-Express-pink.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Made%20with-Node.js-black.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Made%20with-Mongoose-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Made%20with-MUI-blue.svg)](https://shields.io/)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
+[![Generic badge](https://img.shields.io/badge/Made%20with-CSS-red.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Made%20with-HTML-yellow.svg)](https://shields.io/)
 
-```bash
-git clone https://github.com/SEI-Remote/decoupled-mern-jwt-auth-template-back-end <name-of-your-app-here>-back-end
-cd <name-of-your-app-here>-back-end
-code .
-```
+<br>
 
-With the project open in VS Code, open a terminal and run:
+## External Resources Used:
+<a href="https://mui.com/">MUI</a> for their CSS framework<br/>
+<a href="https://www.zondicons.com/">Zondicons</a> for their beautiful icons<br/>
+<a href="https://www.mapbox.com/">Mapbox</a> for their React Map components<br/>
+<a href="https://www.tiktok.com/">TikTok</a> for their TikTok reviews<br/>
+<a href="https://www.google.com/">Google</a> for their restaurant data<br/>
 
-```bash
-rm -rf .git
-```
-
-Here's what your command line output should like after this step (note that the indicator that we are in a git repository is gone!)
-
-<img src="https://i.imgur.com/L47kNOZ.png" alt="The command line before and after running the rm -rf .git command. Before git:(main) is visible indiating that the directory contains a git repository, after the command it is not.">
-
-Re-initialize a git repository:
-
-```bash
-git init
-```
-
-Create a repo for this project on GitHub and add that remote to your project with:
-
-```bash
-git remote add origin your-repo-URL-here
-```
-
-Run npm i to fetch the template's dependencies:
-
-```bash
-npm i
-```
-
-touch a .env file:
-
-```bash
-touch .env
-```
-
-Fill it with the following:
-
-```
-DATABASE_URL=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-CLOUDINARY_URL=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-```
-
-Replace the `DATABASE_URL`, `SECRET`, and `CLOUDINARY_URL` with values that you provide.
-
-> 🚨 Place secrets in this `.env` file. The contents of this file WILL NOT be exposed to site visitors.
-
-Delete this README.md, then make an initial commit:
-
-```bash
-git add .
-git commit -m "initial commit"
-git push origin main
-```
-
-You're done!
+## Special Thanks:
+# Amanda Stern for photoshoping our little tot friend <3
+![ToT friend](./public/tot.png)
