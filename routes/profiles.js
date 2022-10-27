@@ -10,10 +10,19 @@ const router = Router();
 router.use(decodeUserFromToken);
 
 router.get("/", checkAuth, profilesCtrl.index);
+
 router.get("/:id", checkAuth, profilesCtrl.show);
 
 router.patch("/:id", checkAuth, profilesCtrl.follow);
+
 router.put("/:id", checkAuth, profilesCtrl.unfollow);
+
 router.put("/:profileId/:ttReviewId", checkAuth, profilesCtrl.addToWishlist);
+
+router.delete(
+  "/:profileId/:ttReviewId",
+  checkAuth,
+  profilesCtrl.removeFromWishlist
+);
 
 export { router };

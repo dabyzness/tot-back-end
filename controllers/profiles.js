@@ -81,4 +81,21 @@ const addToWishlist = async (req, res) => {
   }
 };
 
-export { index, show, follow, unfollow, addToWishlist };
+const removeFromWishlist = async (req, res) => {
+  try {
+    const { profileId, ttReviewId } = req.params;
+
+    const profile = await Profile.findById(profileId);
+
+    profile.wishlist.pull(ttReviewId);
+
+    const savedProfile = await (await profile.save()).populate("wishlist");
+
+    res.status(200).json({ wishlist: savedProfile.wishlist });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
+export { index, show, follow, unfollow, addToWishlist, removeFromWishlist };
