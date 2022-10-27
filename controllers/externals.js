@@ -53,6 +53,14 @@ async function getDataFromURL(shortURL, count = 0) {
       numComments: `${
         website.data.split("description")[1].split('"')[2].split(" ")[2]
       }`,
+      expiresAt: Number(
+        website.data
+          .split("background-image:url")[1]
+          .split(")")[0]
+          .split("(")[1]
+          .split("expires=")[1]
+          .split("&")[0]
+      ),
     };
 
     return data;

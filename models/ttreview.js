@@ -24,6 +24,7 @@ const ttReviewSchema = new Schema(
     staticImg: String,
     tiktoker: String,
     vidID: { type: String, unique: true },
+    expiresAt: Number,
   },
   {
     timestamps: true,

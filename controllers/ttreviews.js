@@ -4,17 +4,13 @@ import { getDataFromURL } from "./externals.js";
 
 const create = async (req, res) => {
   try {
-    if (req.body.url.length < 40) {
-      const data = await getDataFromURL(req.body.url);
-      req.body.ttNumLikes = data.numLikes;
-      req.body.ttNumComments = data.numComments;
-      req.body.staticImg = data.staticImg;
-      req.body.tiktoker = data.url.split("/")[3];
-      req.body.vidID = data.url.split("/")[5].split("?")[0];
-    } else {
-      req.body.tiktoker = req.body.url.split("/")[3];
-      req.body.vidID = req.body.url.split("/")[5].split("?")[0];
-    }
+    const data = await getDataFromURL(req.body.url);
+    req.body.ttNumLikes = data.numLikes;
+    req.body.ttNumComments = data.numComments;
+    req.body.staticImg = data.staticImg;
+    req.body.tiktoker = data.url.split("/")[3];
+    req.body.vidID = data.url.split("/")[5].split("?")[0];
+    req.body.expiresAt = data.expiresAt;
 
     req.body.sharer = req.user.profile;
 
@@ -73,4 +69,27 @@ const deleteTTReview = async (req, res) => {
   }
 };
 
-export { create, index, show, update, deleteTTReview as delete };
+const refreshTTData = async (req, res) => {
+  try {
+    const { ttReviewId } = req.params;
+
+    const { url } = await TTReview.findById(ttReviewId);
+
+    const { staticImg, numLikes, numComments, expiresAt } =
+      await getDataFromURL(url);
+    console.log(expiresAt);
+
+    const ttReview = await TTReview.findByIdAndUpdate(ttReviewId, {
+      staticImg,
+      numLikes,
+      numComments,
+      expiresAt,
+    });
+
+    res.status(200).json(ttReview);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+export { create, index, show, update, deleteTTReview as delete, refreshTTData };
