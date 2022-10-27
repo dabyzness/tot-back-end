@@ -210,7 +210,7 @@ async function scrapeGoogle(url) {
       /tel:[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/g
     );
 
-    filteredResponse.tel = number[0].slice(4, number[0].length);
+    filteredResponse.tel = number ? number[0].slice(4, number[0].length) : "0";
 
     // Picture Links
     let result = data.data.match(
