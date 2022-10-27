@@ -102,6 +102,22 @@ const updateRating = async (req,res) => {
   }
 }
 
+const deleteRating = async (req,res) => {
+  try{
+    const restaurant = await Restaurant.findByIdAndUpdate(req.params.id,{
+      $pull: {
+        ratings: {_id : req.params.ratingid}
+      }
+    })
+    const author = await Profile.findById(req.user.profile)
+    author.visited.pull(req.params.id)
+    author.save()
+    res.status(200).json(restaurant)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 
 export {
   create,
@@ -111,5 +127,6 @@ export {
   deleteRestaurant as delete,
   createRating,
   showRating,
-  updateRating
+  updateRating,
+  deleteRating
 }
