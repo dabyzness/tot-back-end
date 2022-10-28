@@ -50,11 +50,12 @@ const update = async (req, res) => {
   try {
     const restaurant = await Restaurant.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { tags: req.body },
       { new: true }
     );
     res.status(200).json(restaurant);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
