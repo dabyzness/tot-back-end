@@ -161,14 +161,8 @@ async function scrapeGoogle(url) {
   try {
     const data = await axios.get(url);
 
-    // console.log(data);
     const filteredResponse = {};
 
-    // const location = url.split("@")[1].split(",");
-    // filteredResponse.location = {
-    //   latitude: Number(location[0]),
-    //   longitude: Number(location[1]),
-    // };
     const location = url.split("@")[1].split(",");
     filteredResponse.location = {
       latitude: location[0],
@@ -233,6 +227,9 @@ async function scrapeGoogle(url) {
     const finalPictureArray = [];
 
     for (let i = 0; i < 5; i += 1) {
+      if (!refined[i]) {
+        break;
+      }
       finalPictureArray.push(refined[i]);
     }
 
