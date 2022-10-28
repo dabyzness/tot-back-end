@@ -35,5 +35,5 @@ Have you ever been scrolling on TikTok and found a review of a restaurant you'd 
 <a href="https://www.google.com/">Google</a> for their restaurant data<br/>
 
 ## Special Thanks:
-# Amanda Stern for photoshoping our little tot friend <3
+# Amanda Stern for photoshopping our little tot friend <3
 ![ToT friend](./public/tot.png)
