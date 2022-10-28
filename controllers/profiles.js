@@ -23,47 +23,59 @@ function show(req, res) {
     });
 }
 
-function follow(req, res) {
-  Profile.findById(req.params.id)
-    .then((profile) => {
-      profile.followers.push(req.user.profile);
-      profile.save().then((savedProfile) => {
-        Profile.findById(req.user.profile).then((currentProfile) => {
-          currentProfile.following.push(savedProfile._id);
-          currentProfile.save().then(() => {
-            res.json(savedProfile);
-          });
-        });
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-}
+const follow = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-function unfollow(req, res) {
-  Profile.findById(req.params.id)
-    .then((profile) => {
-      const index = profile.followers.indexOf(req.user.profile);
-      console.log(index);
-      profile.followers.splice(index, 1);
-      profile.save().then((savedProfile) => {
-        Profile.findById(req.user.profile).then((currentProfile) => {
-          const idx = currentProfile.following.indexOf(savedProfile._id);
-          console.log(idx);
-          currentProfile.following.splice(idx, 1);
-          currentProfile.save().then(() => {
-            res.json(savedProfile);
-          });
-        });
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+    const profileToFollow = await Profile.findById(id);
+    const profileThatIsFollowing = await Profile.findById(req.user.profile);
+
+    profileToFollow.followers.push(req.user.profile);
+    profileThatIsFollowing.following.push(profileToFollow);
+
+    const profileFollowed = await (
+      await profileToFollow.save()
+    ).populate("followers");
+
+    const profileFollowing = await (
+      await profileThatIsFollowing.save()
+    ).populate("following");
+
+    res.status(200).json({
+      followed: profileFollowed.followers,
+      following: profileFollowing.following,
     });
-}
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+const unfollow = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const profileToFollow = await Profile.findById(id);
+    const profileThatIsFollowing = await Profile.findById(req.user.profile);
+
+    profileToFollow.followers.pull(req.user.profile);
+    profileThatIsFollowing.following.pull(profileToFollow);
+
+    const profileFollowed = await (
+      await profileToFollow.save()
+    ).populate("followers");
+
+    const profileFollowing = await (
+      await profileThatIsFollowing.save()
+    ).populate("following");
+
+    res.status(200).json({
+      followed: profileFollowed.followers,
+      following: profileFollowing.following,
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 const addToWishlist = async (req, res) => {
   try {
