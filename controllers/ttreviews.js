@@ -36,7 +36,9 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const ttreviews = await TTReview.find({}).populate("sharer");
+    const ttreviews = await TTReview.find({})
+      .populate("sharer")
+      .sort({_id:-1})
     res.status(200).json(ttreviews);
   } catch (error) {
     res.status(500).json(error);

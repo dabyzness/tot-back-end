@@ -21,7 +21,8 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const restaurants = await Restaurant.find({});
+    const restaurants = await Restaurant.find({})
+      .sort({_id:-1})
     res.status(200).json(restaurants);
   } catch (error) {
     res.status(500).json(error);
