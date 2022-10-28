@@ -34,6 +34,7 @@ const show = async (req, res) => {
         model:"Profile"
       }
     })
+    .populate("ttreviews")
     res.status(200).json(restaurant)
   } catch (error) {
     res.status(500).json(error);
@@ -92,14 +93,12 @@ const updateRating = async (req,res) => {
   try {
     const restaurant = await Restaurant.findById(req.params.id)
       .populate("ratings.author")
+      .populate("ttreviews")
     const rating = restaurant.ratings.id(req.params.ratingid)
     rating.comment = req.body.comment
     rating.rating = req.body.rating
     await restaurant.save()
-    // restaurant.populate({
-    //   path: "ratings",
-    //   populate: { path: "author"}
-    // })
+
     res.status(200).json(restaurant)
   } catch (error) {
     res.status(500).json(error)
